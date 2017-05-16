@@ -106,8 +106,8 @@ def ln_post(theta):
 ndim = 2
 nwalkers = 200
 z = np.zeros((ndim,nwalkers))
-init_pos = (9.,0.5)
-h = 1e-1
+init_pos = (9.,0.01)
+h = 1e-2
 pos_i =[]
 for i in range(ndim):
     z[i,:] = init_pos[i] + h*np.random.randn(nwalkers)
@@ -115,14 +115,14 @@ for i in range(ndim):
 for i in range(nwalkers):
     pos_i.append(np.array([z[0,i],z[1,i]]))
 
-b_steps, steps = 100, 500
+b_steps, steps = 200, 500
 
 sampler = emcee.EnsembleSampler(nwalkers, ndim, ln_post, threads=10)
 
 pos,prob,state = sampler.run_mcmc(pos_i, b_steps)
 print sampler.acceptance_fraction.mean()
 sampler.reset()
-_,_,_ = sampler.run_mcmc(pos, steps,rstate0=state)
+_,_,_ = sampler.run_mcmc(pos, steps,rstate0=state,lnprob0=prob)
 print sampler.acceptance_fraction.mean()
 
 np.savetxt('chains.txt', sampler.flatchain)
