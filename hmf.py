@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def load_hmf(hmfdata='../data/hmf.dat'):
+def load_hmf(hmfdata='hmf.dat'):
     """Load Halo Mass Function from hmfdata."""
     lnMh_arr, dndlnMh_arr = np.genfromtxt(hmfdata, unpack=True)
     return(lnMh_arr, dndlnMh_arr)
@@ -18,5 +18,3 @@ if __name__ == "__main__":
     plt.xlabel(r'$\lg\;M_h\;[M_{\odot}]$')
     plt.ylabel(r'$dn/\ln\;M_h$')
     plt.show()
-
-
