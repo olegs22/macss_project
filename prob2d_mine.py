@@ -9,7 +9,7 @@ def f_blue(Halo_mass, lg_mq, mu_c):
     return(np.exp(-_mh**mu_c))
 
 
-def get_prob2d1(theta, use_red=True, sigma_lnMs=0.49730, hmfdata="../data/hmf.dat"):
+def get_prob2d1(theta, use_red=True, sigma_lnMs=0.49730, hmfdata="hmf.dat"):
     lg_mq, mu_c = theta
     """
     Derive p(lnMs, lnMh) by using the Bayes' Theorem:
