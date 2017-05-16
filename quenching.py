@@ -2,7 +2,7 @@ import numpy as np
 import emcee
 from prob2d_mine import get_prob2d1
 from read_mock import read_mock
-mock = '/Users/Oleg/Documents/macss2017_quenching/data/iHODcatalog_bolshoi.h5'
+mock = 'iHODcatalog_bolshoi.h5'
 
 def exp_Mh_split(theta, use_red):
 
@@ -117,12 +117,12 @@ for i in range(nwalkers):
 
 b_steps, steps = 100, 500
 
-sampler = emcee.EnsembleSampler(nwalkers, ndim, lnpost, threads=10)
+sampler = emcee.EnsembleSampler(nwalkers, ndim, ln_post, threads=10)
 
 pos,prob,state = sampler.run_mcmc(pos_i, b_steps)
 print sampler.acceptance_fraction.mean()
 sampler.reset()
 _,_,_ = sampler.run_mcmc(pos, steps,rstate0=state)
-print print sampler.acceptance_fraction.mean()
+print sampler.acceptance_fraction.mean()
 
 np.savetxt('chains.txt', sampler.flatchain)
